@@ -14,9 +14,10 @@ Create a brand new django-node image if you did not yet:
 
 Launch container:
 
-    sudo docker run -i -t $USER/django-node:brand-new /bin/bash
+    sudo docker run -i -t --name django-myproject $USER/django-node:brand-new /bin/bash
 
-Create Django project, do not forget rename `PROJECT_NAME` variable:
+Create Django project, do not forget change `PROJECT_NAME` and `EMAIL` variables:
 
-    export PROJECT_NAME=myproject
-    curl -s  https://raw.githubusercontent.com/titovanton/bicycle-docker/master/django-node/create_project.sh | sudo bash
+    export PROJECT_NAME=myproject; \
+    export EMAIL=mail@titovanton.com; \
+    curl -s  https://raw.githubusercontent.com/titovanton/bicycle-docker/master/django-node/create_project.sh | /bin/bash

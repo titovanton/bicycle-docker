@@ -2,7 +2,7 @@ FROM ubuntu:14.04
 
 MAINTAINER Titov Anton <mail@titovanton.com>
 
-EXPOSE 8000 8001
+EXPOSE 8888
 
 RUN apt-get -qq update
 RUN apt-get -qqy install git
