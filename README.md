@@ -24,4 +24,9 @@ Create Django project, do not forget change `PROJECT_NAME` and `EMAIL` variables
 
 ## Samba-node
 
+Setup:
+
+    export user=$USER
+    curl -s https://raw.githubusercontent.com/titovanton/bicycle-docker/master/samba-node/setup.sh | sudo -E bash
+
     sudo docker run -d --name samba-node --volumes-from django-node -p 137:137/udp -p 138:138/udp -p 135:135/tcp -p 139:139/tcp -p 445:445/tcp titovanton/samba-node:brand-new
