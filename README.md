@@ -28,9 +28,12 @@ Setup (set variables as you wish):
 
     REPO=$USER && USERNAME=$USER; \
     sudo docker build --rm -t $REPO/samba-node:brand-new https://raw.githubusercontent.com/titovanton/bicycle-docker/master/samba-node/Dockerfile; \
-    sudo docker run -t -i --name samba-adduser $REPO/samba-node:brand-new /setup/create_user.sh $USERNAME; \
-    sudo docker commit samba-adduser $REPO/samba-node:$USERNAME; \
-    sudo docker rm samba-adduser
+    sudo docker run -t -i --name="samba-adduser" $REPO/samba-node:brand-new /setup/create_user.sh $USERNAME; \
+    sudo docker commit samba-adduser $REPO/samba-node:tmp; \
+    sudo docker rm samba-adduser; \
+    sudo docker run -d --name="samba-node" $REPO/samba-node:tmp smbd -F -S; \
+    sudo docker commit samba-node $REPO/samba-node:$USERNAME; \
+    sudo docker rmi $REPO/samba-node:tmp
 
 Run:
 
