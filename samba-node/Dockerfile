@@ -11,4 +11,4 @@ RUN mkdir -p /setup
 RUN curl -s "https://raw.githubusercontent.com/titovanton/bicycle-docker/master/samba-node/create_user.sh" > /setup/create_user.sh
 RUN chmod +x /setup/create_user.sh
 
-CMD ["smbd", "-F", "-S"]
+ENTRYPOINT ["smbd", "-F", "-S"]
