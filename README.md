@@ -10,7 +10,9 @@ Ubuntu 14.04 LTS:
 
 Create a brand new django-node image if you did not yet:
 
-    sudo docker build -t $USER/django-node:brand-new https://raw.githubusercontent.com/titovanton/bicycle-docker/master/django-node/Dockerfile
+    sudo docker build -t \
+        $USER/django-node:brand-new \
+        https://raw.githubusercontent.com/titovanton/bicycle-docker/master/django-node/Dockerfile
 
 Launch container:
 
@@ -30,10 +32,16 @@ Build samba-node:
         $REPO/samba-node:brand-new \
         https://raw.githubusercontent.com/titovanton/bicycle-docker/master/samba-node/Dockerfile
 
-Configure user (set variables as you wish):
+Prepare:
 
     REPO=$USER && USERNAME=$USER && SHARE=/webapps; \
-    sudo mkdir -p $SHARE && sudo chown -R $USERNAME:$USERNAME $SHARE; \
+    sudo useradd --no-log-init --no-create-home samba-share; \
+    sudo mkdir -p $SHARE; \
+    sudo chown -R $USERNAME:samba-share $SHARE; \
+    sudo chmod 775 $SHARE
+
+Configure user (set variables as you wish):
+
     sudo docker run -t -i \
         --name samba-adduser \
         $REPO/samba-node:brand-new \
@@ -43,8 +51,6 @@ Configure user (set variables as you wish):
 
 Run (set variables as you wish):
 
-    REPO=$USER && USERNAME=$USER && SHARE=/webapps; \
-    sudo mkdir -p $SHARE && sudo chown -R $USERNAME:$USERNAME $SHARE; \
     sudo docker run -d \
         --name samba-node \
         -v /webapps:/webapps \
