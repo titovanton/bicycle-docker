@@ -32,24 +32,24 @@ Build samba-node:
         $REPO/samba-node:brand-new \
         https://raw.githubusercontent.com/titovanton/bicycle-docker/master/samba-node/Dockerfile
 
-Prepare:
+Prepare (set variables as you wish):
 
     REPO=$USER && USERNAME=$USER && SHARE=/webapps; \
-    sudo useradd --no-log-init --no-create-home samba-share; \
     sudo mkdir -p $SHARE; \
-    sudo chown -R $USERNAME:samba-share $SHARE; \
+    sudo chown -R root:sambashare $SHARE; \
     sudo chmod 775 $SHARE
+    sudo adduser $USERNAME sambashare
 
-Configure user (set variables as you wish):
+Configure user:
 
     sudo docker run -t -i \
         --name samba-adduser \
         $REPO/samba-node:brand-new \
-        /setup/create_user.sh $USERNAME; \
+        /samba/create_user.sh $USERNAME; \
     sudo docker commit samba-adduser $REPO/samba-node:$USERNAME; \
     sudo docker rm samba-adduser
 
-Run (set variables as you wish):
+Run:
 
     sudo docker run -d \
         --name samba-node \
@@ -59,4 +59,4 @@ Run (set variables as you wish):
         -p 135:135/tcp \
         -p 139:139/tcp \
         -p 445:445/tcp \
-        $REPO/samba-node:$USERNAME smbd -F -S
+        $REPO/samba-node:$USERNAME /samba/get_up.sh

@@ -8,4 +8,4 @@ fi
 useradd --no-log-init --no-create-home --no-user-group $USERNAME
 smbpasswd -a $USERNAME
 smbpasswd -e $USERNAME
-adduser $USERNAME samba-share
+adduser $USERNAME sambashare
