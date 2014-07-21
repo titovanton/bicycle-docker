@@ -49,8 +49,9 @@ Configure user:
     sudo docker commit samba-adduser $REPO/samba-node:$USERNAME; \
     sudo docker rm samba-adduser
 
-Run:
+Run (set IP as you wish):
 
+    # IP=$(ifconfig eth0 | grep 'inet addr' | cut -d: -f2 | awk '{print $1}')
     sudo docker run -d \
         --name samba-node \
         -v /webapps:/webapps \
