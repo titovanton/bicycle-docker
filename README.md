@@ -26,19 +26,20 @@ Create Django project, do not forget change `PROJECT_NAME` and `EMAIL` variables
 
 ## Samba-node
 
+Prepare (set variables as you wish):
+
+    REPO=$USER && USERNAME=$USER && SHARE=/webapps; \
+
+    sudo mkdir -p $SHARE; \
+    sudo chown -R root:www-data $SHARE; \
+    sudo chmod 775 $SHARE; \
+    sudo adduser $USERNAME www-data
+
 Build samba-node:
 
     sudo docker build --rm -t \
         $REPO/samba-node:brand-new \
         https://raw.githubusercontent.com/titovanton/bicycle-docker/master/samba-node/Dockerfile
-
-Prepare (set variables as you wish):
-
-    REPO=$USER && USERNAME=$USER && SHARE=/webapps; \
-    sudo mkdir -p $SHARE; \
-    sudo chown -R root:sambashare $SHARE; \
-    sudo chmod 775 $SHARE
-    sudo adduser $USERNAME sambashare
 
 Configure user:
 
@@ -51,7 +52,8 @@ Configure user:
 
 Run (set IP as you wish):
 
-    # IP=$(ifconfig eth0 | grep 'inet addr' | cut -d: -f2 | awk '{print $1}')
+    # IP=$(ifconfig eth0 | grep 'inet addr' | cut -d: -f2 | awk '{print $1}'); \
+
     sudo docker run -d \
         --name samba-node \
         -v /webapps:/webapps \
