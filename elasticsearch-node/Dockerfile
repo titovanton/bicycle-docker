@@ -14,4 +14,4 @@ RUN /usr/share/elasticsearch/bin/plugin \
     -install analysis-morphology \
     -url http://dl.bintray.com/content/imotov/elasticsearch-plugins/org/elasticsearch/elasticsearch-analysis-morphology/1.2.0/elasticsearch-analysis-morphology-1.2.0.zip
 RUN curl -s "https://raw.githubusercontent.com/titovanton/bicycle-docker/master/elasticsearch-node/get_up.sh" > /elasticsearch/get_up.sh
-RUN chmod +x /samba/get_up.sh
+RUN chmod +x /elasticsearch/get_up.sh
