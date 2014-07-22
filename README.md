@@ -68,8 +68,6 @@ Run (set IP as you wish):
 
 ## Automatically Start Containers
 
-Follow the dialog:
-
     file=$(mktemp); \
     curl -s https://raw.githubusercontent.com/titovanton/bicycle-docker/master/auto_start.sh > $file; \
     sudo /bin/bash $file; \
