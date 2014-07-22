@@ -1,5 +1,14 @@
 # bicycle-docker
 
+## Iptables
+
+It is important to install iptables rules before installing docker, because of docker add his own rules:
+
+    file=$(mktemp) && \
+    curl -s https://raw.githubusercontent.com/titovanton/bicycle-docker/master/iptables/add_rules.sh > $file && \
+    sudo /bin/bash $file && \
+    rm $file
+
 ## Install Docker
 
 Ubuntu 14.04 LTS:
@@ -7,14 +16,11 @@ Ubuntu 14.04 LTS:
     curl -s https://get.docker.io/ubuntu/ | sudo sh
     sudo sh -c "echo 'DOCKER_OPTS=\"-r=false\"' > /etc/default/docker"
 
-## Iptables
+## PostgreSQL node
 
-    file=$(mktemp) && \
-    curl -s https://raw.githubusercontent.com/titovanton/bicycle-docker/master/iptables/add_rules.sh > $file && \
-    sudo /bin/bash $file && \
-    rm $file
+It also contains Redis, Memcached and /static/ + /media/ folders
 
-## Create Django-node
+## Create Django node
 
 Create a brand new django-node image if you did not yet:
 
@@ -32,7 +38,7 @@ Create Django project, do not forget change `PROJECT_NAME` and `EMAIL` variables
     export EMAIL=mail@titovanton.com; \
     curl -s https://raw.githubusercontent.com/titovanton/bicycle-docker/master/django-node/create_project.sh | /bin/bash
 
-## ElasticSearch-node
+## ElasticSearch node
 
 Prepare (set variables as you wish):
 
@@ -50,7 +56,7 @@ Run daemon container:
         --name elasticsearch \
         $REPO/elasticsearch:brand-new
 
-## Samba-node
+## Samba node
 
 Prepare (set variables as you wish):
 
@@ -88,7 +94,7 @@ Run daemon container (set IP as you wish):
         -p 135:135/tcp \
         -p 139:139/tcp \
         -p 445:445/tcp \
-        $REPO/samba:$USERNAME /samba/get_up.sh
+        $REPO/samba:$USERNAME
 
 
 ## Automatically Start Containers

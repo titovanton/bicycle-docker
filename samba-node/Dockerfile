@@ -10,6 +10,6 @@ RUN cp /etc/samba/smb.conf /etc/samba/smb.conf.default
 RUN curl -s "https://raw.githubusercontent.com/titovanton/bicycle-docker/master/samba-node/smb.conf" > /etc/samba/smb.conf
 RUN mkdir -p /samba
 RUN curl -s "https://raw.githubusercontent.com/titovanton/bicycle-docker/master/samba-node/create_user.sh" > /samba/create_user.sh
-RUN curl -s "https://raw.githubusercontent.com/titovanton/bicycle-docker/master/samba-node/get_up.sh" > /samba/get_up.sh
 RUN chmod +x /samba/create_user.sh
-RUN chmod +x /samba/get_up.sh
+
+CMD ["smbd", "--foreground", "--log-stdout"]
