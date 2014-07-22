@@ -55,7 +55,7 @@ Run (set IP as you wish):
 
     # IP=$(ifconfig eth0 | grep 'inet addr' | cut -d: -f2 | awk '{print $1}'); \
 
-    sudo docker --restart=true run -d \
+    sudo docker run -d \
         --name samba-node \
         -v /webapps:/webapps \
         -p 137:137/udp \
