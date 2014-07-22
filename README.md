@@ -9,7 +9,10 @@ Ubuntu 14.04 LTS:
 
 ## Iptables
 
-    curl -s https://raw.githubusercontent.com/titovanton/bicycle-docker/master/iptables/add_rules.sh | sudo bash
+    file=$(mktemp) && \
+    curl -s https://raw.githubusercontent.com/titovanton/bicycle-docker/master/iptables/add_rules.sh > $file && \
+    sudo /bin/bash $file && \
+    rm $file
 
 ## Create Django-node
 
