@@ -68,4 +68,6 @@ Run (set IP as you wish):
 
 ## Automatically Start Containers
 
-    curl -s https://raw.githubusercontent.com/titovanton/bicycle-docker/master/auto_start.conf | sudo bash
+    Follow the dialog:
+
+        curl -s https://raw.githubusercontent.com/titovanton/bicycle-docker/master/auto_start.sh | sudo bash
