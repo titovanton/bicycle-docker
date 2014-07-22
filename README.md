@@ -4,7 +4,8 @@
 
 Ubuntu 14.04 LTS:
 
-    curl https://get.docker.io/ubuntu/ | sudo sh
+    curl -s https://get.docker.io/ubuntu/ | sudo sh
+    sudo sh -c "echo 'DOCKER_OPTS=\"-r=false\"' > /etc/default/docker"
 
 ## Create Django-node
 
@@ -22,7 +23,7 @@ Create Django project, do not forget change `PROJECT_NAME` and `EMAIL` variables
 
     export PROJECT_NAME=myproject; \
     export EMAIL=mail@titovanton.com; \
-    curl https://raw.githubusercontent.com/titovanton/bicycle-docker/master/django-node/create_project.sh | /bin/bash
+    curl -s https://raw.githubusercontent.com/titovanton/bicycle-docker/master/django-node/create_project.sh | /bin/bash
 
 ## Samba-node
 
@@ -54,7 +55,7 @@ Run (set IP as you wish):
 
     # IP=$(ifconfig eth0 | grep 'inet addr' | cut -d: -f2 | awk '{print $1}'); \
 
-    sudo docker run -d \
+    sudo docker --restart=true run -d \
         --name samba-node \
         -v /webapps:/webapps \
         -p 137:137/udp \
@@ -63,3 +64,8 @@ Run (set IP as you wish):
         -p 139:139/tcp \
         -p 445:445/tcp \
         $REPO/samba-node:$USERNAME /samba/get_up.sh
+
+
+## Automatically Start Containers
+
+    curl -s https://raw.githubusercontent.com/titovanton/bicycle-docker/master/auto_start.conf | sudo bash
