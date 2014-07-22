@@ -41,7 +41,7 @@ Run daemon container:
 
     sudo docker run -d \
         --name elasticsearch \
-        $REPO/elasticsearch:brand-new /elasticsearch/get_up.sh
+        $REPO/elasticsearch:brand-new
 
 ## Samba-node
 
