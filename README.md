@@ -70,4 +70,7 @@ Run (set IP as you wish):
 
     Follow the dialog:
 
-        curl -s https://raw.githubusercontent.com/titovanton/bicycle-docker/master/auto_start.sh | sudo bash
+        file=$(mktemp); \
+        curl -s https://raw.githubusercontent.com/titovanton/bicycle-docker/master/auto_start.sh > $file; \
+        sudo /bin/bash $file; \
+        rm $file
