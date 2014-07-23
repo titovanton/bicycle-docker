@@ -11,3 +11,9 @@ RUN cd /tmp && \
         -url http://dl.bintray.com/content/imotov/elasticsearch-plugins/org/elasticsearch/elasticsearch-analysis-morphology/1.2.0/elasticsearch-analysis-morphology-1.2.0.zip
 
 CMD ["/elasticsearch/bin/elasticsearch"]
+
+# Expose ports.
+# - 9200: HTTP
+# - 9300: transport
+EXPOSE 9200
+EXPOSE 9300
