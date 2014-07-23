@@ -20,6 +20,22 @@ Ubuntu 14.04 LTS:
 
 It also contains Redis, Memcached and /static/ + /media/ folders
 
+Prepare (set variables as you wish):
+
+    REPO=$USER
+
+Build image:
+
+    sudo docker build --rm -t \
+        $REPO/postgres:brand-new \
+        https://raw.githubusercontent.com/titovanton/bicycle-docker/master/postgresql-node/Dockerfile
+
+Run daemon container:
+
+    sudo docker run -d \
+        --name postgres \
+        $REPO/postgres:brand-new
+
 ## Create Django node
 
 Create a brand new django-node image if you did not yet:
