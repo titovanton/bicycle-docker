@@ -94,7 +94,7 @@ Run daemon container (set IP as you wish):
         -p 135:135/tcp \
         -p 139:139/tcp \
         -p 445:445/tcp \
-        $REPO/samba:$USERNAME
+        $REPO/samba:$USERNAME /usr/sbin/smbd --foreground --log-stdout
 
 
 ## Automatically Start Containers
