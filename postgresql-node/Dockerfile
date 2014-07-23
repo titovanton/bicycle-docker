@@ -1,27 +1,26 @@
-FROM postgres
+FROM ubuntu:14.04
 
 MAINTAINER Titov Anton <mail@titovanton.com>
 
-# Install Redis.
-RUN \
-    cd /tmp && \
-    wget http://download.redis.io/redis-stable.tar.gz && \
-    tar xvzf redis-stable.tar.gz && \
-    cd redis-stable && \
-    make && \
-    make install && \
-    cp -f src/redis-sentinel /usr/local/bin && \
-    mkdir -p /etc/redis && \
-    cp -f *.conf /etc/redis && \
-    rm -rf /tmp/redis-stable* && \
-    sed -i 's/^\(bind .*\)$/# \1/' /etc/redis/redis.conf && \
-    sed -i 's/^\(daemonize .*\)$/# \1/' /etc/redis/redis.conf && \
-    sed -i 's/^\(dir .*\)$/# \1\ndir \/data/' /etc/redis/redis.conf && \
-    sed -i 's/^\(logfile .*\)$/# \1/' /etc/redis/redis.conf
-
-EXPOSE 6379
-
-# Install Memcached
+RUN apt-get -qqy install postgresql-9.3
+RUN apt-get -qqy install postgresql-server-dev-9.3
+RUN apt-get -qqy install postgresql-contrib-9.3
+RUN apt-get -qqy install redis-server
 RUN apt-get -qqy install memcached
 
-CMD ["redis-server", "/etc/redis/redis.conf"]
+VOLUME ["/data"]
+
+RUN mkdir -p /data/static /data/media /data/internal
+RUN curl -s "https://raw.githubusercontent.com/titovanton/bicycle-docker/master/postgresql-node/run.sh" > /data/run.sh
+RUN chmod +x /data/run.sh
+
+# psql
+EXPOSE 5432
+
+# redis
+EXPOSE 6379
+
+# memcached
+EXPOSE  11211
+
+CMD ["/postgres/run.sh"]
