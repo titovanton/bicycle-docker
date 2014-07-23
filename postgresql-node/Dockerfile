@@ -11,11 +11,11 @@ RUN apt-get -qqy install postgresql-contrib-9.3
 RUN apt-get -qqy install redis-server
 RUN apt-get -qqy install memcached
 
-VOLUME ["/data"]
+RUN mkdir /run
+RUN curl -s "https://raw.githubusercontent.com/titovanton/bicycle-docker/master/postgresql-node/run.sh" > /run/.sh
+RUN chmod +x /run/.sh
 
-RUN mkdir -p /data/static /data/media /data/internal
-RUN curl -s "https://raw.githubusercontent.com/titovanton/bicycle-docker/master/postgresql-node/run.sh" > /data/run.sh
-RUN chmod +x /data/run.sh
+VOLUME ["/data/static", "/data/media", "/data/internal"]
 
 # psql
 EXPOSE 5432
@@ -26,4 +26,4 @@ EXPOSE 6379
 # memcached
 EXPOSE  11211
 
-CMD ["/postgres/run.sh"]
+CMD ["/run/.sh"]
