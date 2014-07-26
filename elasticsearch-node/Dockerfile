@@ -1,6 +1,7 @@
 FROM dockerfile/java
 
 MAINTAINER Titov Anton <mail@titovanton.com>
+
  
 RUN cd /tmp && \
     wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.1.1.tar.gz && \

@@ -1,11 +1,9 @@
-FROM ubuntu:14.04
+FROM titovanon/ubuntu
 
 MAINTAINER Titov Anton <mail@titovanton.com>
 
 
-RUN apt-get -qq update
 RUN apt-get -qqy install samba
-RUN apt-get -qqy install curl
 RUN cp /etc/samba/smb.conf /etc/samba/smb.conf.default
 RUN curl -s "https://raw.githubusercontent.com/titovanton/bicycle-docker/master/samba-node/smb.conf" > /etc/samba/smb.conf
 RUN mkdir -p /samba

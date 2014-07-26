@@ -1,10 +1,8 @@
-FROM ubuntu:14.04
+FROM titovanon/ubuntu
 
 MAINTAINER Titov Anton <mail@titovanton.com>
 
 
-RUN apt-get -qq update
-RUN apt-get -qqy install curl
 RUN apt-get -qqy install postgresql-9.3
 RUN apt-get -qqy install postgresql-server-dev-9.3
 RUN apt-get -qqy install postgresql-contrib-9.3

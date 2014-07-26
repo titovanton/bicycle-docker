@@ -16,6 +16,17 @@ Ubuntu 14.04 LTS:
     curl -s https://get.docker.io/ubuntu/ | sudo sh
     sudo sh -c "echo 'DOCKER_OPTS=\"-r=false\"' > /etc/default/docker"
 
+## Ubuntu curl:
+
+It is a base image, the others just extends it
+
+    sudo docker build --rm -t \
+        titovanton/ubuntu \
+        https://raw.githubusercontent.com/titovanton/bicycle-docker/master/ubuntu/Dockerfile
+    sudo docker build --rm -t \
+        titovanton/uwsgi \
+        https://raw.githubusercontent.com/titovanton/bicycle-docker/master/uwsgi/Dockerfile
+
 ## PostgreSQL node
 
 It also contains Redis, Memcached and /static/ + /media/ folders
