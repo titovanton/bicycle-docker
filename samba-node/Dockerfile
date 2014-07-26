@@ -1,4 +1,4 @@
-FROM titovanon/ubuntu:base
+FROM ubuntu:base
 
 MAINTAINER Titov Anton <mail@titovanton.com>
 

@@ -19,31 +19,27 @@ Ubuntu 14.04 LTS:
 ## Basic images:
 
     sudo docker build --rm -t \
-        titovanton/ubuntu:base \
+        ubuntu:base \
         https://raw.githubusercontent.com/titovanton/bicycle-docker/master/ubuntu/Dockerfile && \
     sudo docker build --rm -t \
-        titovanton/uwsgi:base \
+        uwsgi:base \
         https://raw.githubusercontent.com/titovanton/bicycle-docker/master/uwsgi/Dockerfile
 
 ## PostgreSQL node
 
 It also contains Redis, Memcached and /static/ + /media/ folders
 
-Prepare (set variables as you wish):
-
-    REPO=$USER
-
 Build image:
 
     sudo docker build --rm -t \
-        $REPO/postgres:brand-new \
+        postgres:brand-new \
         https://raw.githubusercontent.com/titovanton/bicycle-docker/master/postgresql-node/Dockerfile
 
 Run daemon container:
 
     sudo docker run -d \
         --name postgres \
-        $REPO/postgres:brand-new
+        postgres:brand-new
 
 ## Create Django node
 
@@ -65,27 +61,23 @@ Create Django project, do not forget change `PROJECT_NAME` and `EMAIL` variables
 
 ## ElasticSearch node
 
-Prepare (set variables as you wish):
-
-    REPO=$USER
-
 Build image:
 
     sudo docker build --rm -t \
-        $REPO/elasticsearch:brand-new \
+        elasticsearch:brand-new \
         https://raw.githubusercontent.com/titovanton/bicycle-docker/master/elasticsearch-node/Dockerfile
 
 Run daemon container:
 
     sudo docker run -d \
         --name elasticsearch \
-        $REPO/elasticsearch:brand-new
+        elasticsearch:brand-new
 
 ## Samba node
 
 Prepare (set variables as you wish):
 
-    REPO=$USER && USERNAME=$USER && SHARE=/webapps; \
+    USERNAME=$USER && SHARE=/webapps; \
 
     sudo mkdir -p $SHARE && \
     sudo chown -R root:www-data $SHARE && \
@@ -95,16 +87,16 @@ Prepare (set variables as you wish):
 Build image:
 
     sudo docker build --rm -t \
-        $REPO/samba:brand-new \
+        samba:brand-new \
         https://raw.githubusercontent.com/titovanton/bicycle-docker/master/samba-node/Dockerfile
 
 Configure user:
 
     sudo docker run -t -i \
         --name samba-adduser \
-        $REPO/samba:brand-new \
+        samba:brand-new \
         /samba/create_user.sh $USERNAME && \
-    sudo docker commit samba-adduser $REPO/samba:$USERNAME && \
+    sudo docker commit samba-adduser samba:$USERNAME && \
     sudo docker rm samba-adduser
 
 Run daemon container (set IP as you wish):
@@ -119,7 +111,7 @@ Run daemon container (set IP as you wish):
         -p 135:135/tcp \
         -p 139:139/tcp \
         -p 445:445/tcp \
-        $REPO/samba:$USERNAME /usr/sbin/smbd --foreground --log-stdout
+        samba:$USERNAME /usr/sbin/smbd --foreground --log-stdout
 
 
 ## Automatically Start Containers

@@ -1,4 +1,4 @@
-FROM titovanon/uwsgi:base
+FROM uwsgi:base
 
 MAINTAINER Titov Anton <mail@titovanton.com>
 
