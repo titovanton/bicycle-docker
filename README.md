@@ -37,6 +37,9 @@ Run daemon container:
 
     sudo docker run -d \
         --name nginx \
+        -p 80:80 \
+        -p 443:443 \
+        -p 8000:8000 \
         nginx:brand-new
 
 ## PostgreSQL node
@@ -52,7 +55,7 @@ Build image:
 Run daemon container:
 
     sudo docker run -d \
-        --name postgres \
+        --name postgres-<project> \
         postgres:brand-new
 
 ## Django node
@@ -119,7 +122,6 @@ Run daemon container (set IP as you wish):
 
     sudo docker run -d \
         --name samba \
-        -v /webapps:/webapps \
         -p 137:137/udp \
         -p 138:138/udp \
         -p 135:135/tcp \
