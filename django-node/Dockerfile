@@ -1,16 +1,8 @@
-FROM uwsgi:base
+FROM django:base
 
 MAINTAINER Titov Anton <mail@titovanton.com>
 
 
-# less
-RUN apt-get -qqy install node-less
-
-# imagemagick
-RUN apt-get -qqy install imagemagick
-
-# pip apps
-RUN pip -q install Django
 RUN pip -q install python-memcached
 RUN pip -q install django-extensions
 RUN pip -q install django-debug-toolbar

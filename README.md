@@ -22,8 +22,8 @@ Ubuntu 14.04 LTS:
         ubuntu:base \
         https://raw.githubusercontent.com/titovanton/bicycle-docker/master/ubuntu/Dockerfile && \
     sudo docker build --rm -t \
-        uwsgi:base \
-        https://raw.githubusercontent.com/titovanton/bicycle-docker/master/uwsgi/Dockerfile
+        django:base \
+        https://raw.githubusercontent.com/titovanton/bicycle-docker/master/django/Dockerfile
 
 ## PostgreSQL node
 
