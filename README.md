@@ -25,6 +25,20 @@ Ubuntu 14.04 LTS:
         django:base \
         https://raw.githubusercontent.com/titovanton/bicycle-docker/master/django/Dockerfile
 
+## Nginx node
+
+Build image:
+
+    sudo docker build --rm -t \
+        nginx:brand-new \
+        https://raw.githubusercontent.com/titovanton/bicycle-docker/master/nginx-node/Dockerfile
+
+Run daemon container:
+
+    sudo docker run -d \
+        --name nginx \
+        nginx:brand-new
+
 ## PostgreSQL node
 
 It also contains Redis, Memcached and /static/ + /media/ folders
@@ -41,12 +55,12 @@ Run daemon container:
         --name postgres \
         postgres:brand-new
 
-## Create Django node
+## Django node
 
 Create a brand new django-node image if you did not yet:
 
     sudo docker build -t \
-        $USER/django-node:brand-new \
+        django:brand-new \
         https://raw.githubusercontent.com/titovanton/bicycle-docker/master/django-node/Dockerfile
 
 Launch container:

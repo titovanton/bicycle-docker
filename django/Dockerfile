@@ -4,6 +4,7 @@ MAINTAINER Titov Anton <mail@titovanton.com>
 
 
 # python
+RUN apt-get -qqy install ssh
 RUN apt-get -qqy install build-essential
 RUN apt-get -qqy install python2.7-dev
 RUN apt-get -qqy install python-psycopg2

@@ -13,7 +13,7 @@ RUN mkdir /node
 RUN curl -s "https://raw.githubusercontent.com/titovanton/bicycle-docker/master/postgresql-node/run.sh" > /node/run.sh
 RUN chmod +x /node/run.sh
 
-VOLUME ["/data/static", "/data/media", "/data/internal"]
+VOLUME ["/data/static/", "/data/media/", "/data/internal/"]
 
 # psql
 EXPOSE 5432

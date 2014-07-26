@@ -19,4 +19,13 @@ RUN pip -q install cssmin
 RUN pip -q install jsmin
 RUN pip -q install git+git://github.com/titovanton-com/django-assets.git@stable
 
-VOLUME ["/data/nginx", "/data/media", "/data/internal"]
+RUN mkdir /node
+RUN curl -s "https://raw.githubusercontent.com/titovanton/bicycle-docker/master/django-node/run.sh" > /node/run.sh
+RUN chmod +x /node/run.sh
+RUN curl -s "https://raw.githubusercontent.com/titovanton/bicycle-docker/master/django-node/uwsgi.ini" > /node/uwsgi.ini
+
+EXPOSE 8000
+
+VOLUME ["/data/nginx/", "/data/uwsgi/run/", "/data/uwsgi/log/",]
+
+ENTRYPOINT ["/node/run.sh"]

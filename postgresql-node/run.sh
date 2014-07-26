@@ -1,5 +1,5 @@
 #!/bin/bash
 
-service redis-server start
-service postgresql start
-service memcached start
+/etc/init.d/redis-server start
+/etc/init.d/postgresql start
+/etc/init.d/memcached start
