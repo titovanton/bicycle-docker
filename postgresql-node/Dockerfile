@@ -12,6 +12,8 @@ RUN apt-get -qqy install libssl-dev
 RUN apt-get -qqy install redis-server
 RUN apt-get -qqy install memcached
 
+RUN sed -e "s/#.*\(listen_addresses.*=.*'\)localhost'/\1*'/" -i /etc/postgresql/$POSTGRES_VERSION/main/postgresql.conf
+
 RUN curl -s "https://raw.githubusercontent.com/titovanton/bicycle-docker/master/postgresql-node/run.sh" > /run.sh
 RUN chmod +x /run.sh
 

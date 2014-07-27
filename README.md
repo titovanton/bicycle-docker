@@ -15,6 +15,8 @@ Ubuntu 14.04 LTS:
 
     curl -s https://get.docker.io/ubuntu/ | sudo sh
     sudo sh -c "echo 'DOCKER_OPTS=\"-r=false\"' > /etc/default/docker"
+    sudo apt-get upgrade -y
+    sudo apt-get install -y postgresql-client
 
 ## Basic images:
 
@@ -51,6 +53,12 @@ Build image:
     sudo docker build --rm -t \
         postgres:brand-new \
         https://raw.githubusercontent.com/titovanton/bicycle-docker/master/postgresql-node/Dockerfile
+
+Create DB:
+    
+    sudo docker run -e PROJECT_NAME=<project> \
+        --name postgres-create-db \
+        postgres:brand-new /create_db.sh
 
 Run daemon container:
 
@@ -109,7 +117,7 @@ Build image:
 
 Configure user:
 
-    sudo docker run -t -i \
+    sudo docker run -ti \
         --name samba-adduser \
         samba:brand-new \
         /create_user.sh $USERNAME && \
