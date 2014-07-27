@@ -112,7 +112,7 @@ Configure user:
     sudo docker run -t -i \
         --name samba-adduser \
         samba:brand-new \
-        /samba/create_user.sh $USERNAME && \
+        /create_user.sh $USERNAME && \
     sudo docker commit samba-adduser samba:$USERNAME && \
     sudo docker rm samba-adduser
 
