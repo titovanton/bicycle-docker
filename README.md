@@ -1,5 +1,14 @@
 # bicycle-docker
 
+## Create project
+
+You have to specify <project_name> here:
+
+    file=$(mktemp) && \
+    curl -s https://raw.githubusercontent.com/titovanton/bicycle-docker/master/create_project.sh > $file && \
+    sudo -E /bin/bash $file <project_name>  && \
+    rm $file
+
 ## Iptables
 
 It is important to install iptables rules before installing docker, because of docker add his own rules:
