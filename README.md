@@ -60,12 +60,27 @@ Build image:
 Configure postgres user:
 
     sudo docker run -i -t \
-        --name postgres:postgres \
-        postgres:brand-new sudo -i -u postgres
+        --name postgres-postgres \
+        postgres:brand-new /bin/bash
+
+start postgresql and login by postgres user:
+
+    service postgresql start
+    sudo -i -u postgres
 
 now you have to execute:
     
     psql
+
+then:
+    
+    \password
+
+enter password, prompt, then:
+
+    \q
+
+and logout postgres, 
 
 
 ## Django node

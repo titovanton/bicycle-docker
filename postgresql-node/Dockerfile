@@ -9,8 +9,6 @@ RUN sed -e "s/\(command line switches\.\)/\1\n\nhost all all 0.0.0.0\/0 md5/" \
 
 RUN curl -s "https://raw.githubusercontent.com/titovanton/bicycle-docker/master/postgresql-node/run.sh" > /run.sh
 RUN chmod +x /run.sh
-RUN curl -s "https://raw.githubusercontent.com/titovanton/bicycle-docker/master/postgresql-node/postgres.sh" > /postgres.sh
-RUN chmod +x /postgres.sh
 
 VOLUME ["/data/static/", "/data/media/", "/data/internal/"]
 
