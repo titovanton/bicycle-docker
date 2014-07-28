@@ -25,7 +25,10 @@ Ubuntu 14.04 LTS:
         https://raw.githubusercontent.com/titovanton/bicycle-docker/master/ubuntu/Dockerfile && \
     sudo docker build --rm -t \
         django:base \
-        https://raw.githubusercontent.com/titovanton/bicycle-docker/master/django/Dockerfile
+        https://raw.githubusercontent.com/titovanton/bicycle-docker/master/django/Dockerfile && \
+    sudo docker build --rm -t \
+        postgres:base \
+        https://raw.githubusercontent.com/titovanton/bicycle-docker/master/postgresql/Dockerfile
 
 ## Nginx node
 
@@ -54,17 +57,16 @@ Build image:
         postgres:brand-new \
         https://raw.githubusercontent.com/titovanton/bicycle-docker/master/postgresql-node/Dockerfile
 
-Create DB:
+Configure postgres user:
+
+    sudo docker run -i -t \
+        --name postgres:postgres \
+        postgres:brand-new sudo -i -u postgres
+
+now you have to execute:
     
-    sudo docker run -e PROJECT_NAME=<project> \
-        --name postgres-create-db \
-        postgres:brand-new /create_db.sh
+    psql
 
-Run daemon container:
-
-    sudo docker run -d \
-        --name postgres-<project> \
-        postgres:brand-new
 
 ## Django node
 
