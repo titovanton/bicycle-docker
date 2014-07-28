@@ -2,6 +2,7 @@ FROM postgres:base
 
 MAINTAINER Titov Anton <mail@titovanton.com>
 
+
 RUN sed -e "s/#.*\(listen_addresses.*=.*'\)localhost'/\1*'/" \
     -i /etc/postgresql/$POSTGRES_VERSION/main/postgresql.conf
 RUN sed -e "s/\(command line switches\.\)/\1\n\nhost all all 0.0.0.0\/0 md5/" \

@@ -21,9 +21,9 @@ RUN pip -q install git+git://github.com/titovanton-com/django-assets.git@stable
 
 RUN curl -s "https://raw.githubusercontent.com/titovanton/bicycle-docker/master/django-node/run.sh" > /run.sh
 RUN chmod +x /run.sh
+RUN curl -s "https://raw.githubusercontent.com/titovanton/bicycle-docker/master/django-node/create_user.sh" > /run.sh
+RUN chmod +x /create_user.sh
 RUN curl -s "https://raw.githubusercontent.com/titovanton/bicycle-docker/master/django-node/uwsgi.ini" > /uwsgi.ini
-
-EXPOSE 8000
 
 VOLUME ["/data/uwsgi/run/", "/data/uwsgi/log/",]
 
