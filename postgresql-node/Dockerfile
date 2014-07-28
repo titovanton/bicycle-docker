@@ -15,7 +15,7 @@ RUN apt-get -qqy install memcached
 RUN sed -e "s/#.*\(listen_addresses.*=.*'\)localhost'/\1*'/" \
     -i /etc/postgresql/$POSTGRES_VERSION/main/postgresql.conf
 RUN sed -e "s/\(command line switches\.\)/\1\n\nhost all all 0.0.0.0\/0 md5/" \
-    -i /etc/postgresql/9.1/main/pg_hba.conf
+    -i /etc/postgresql/$POSTGRES_VERSION/main/pg_hba.conf
 
 RUN curl -s "https://raw.githubusercontent.com/titovanton/bicycle-docker/master/postgresql-node/run.sh" > /run.sh
 RUN chmod +x /run.sh
