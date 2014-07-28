@@ -11,11 +11,11 @@ if [[ ! $k ]]; then
     echo 'postgres:postgres image does not exists'
     exit 1
 fi
-k=$(docker images django | grep brand-new || false)
-if [[ ! $k ]]; then
-    echo 'django:brand-new does not exists'
-    exit 1
-fi
+# k=$(docker images django | grep brand-new || false)
+# if [[ ! $k ]]; then
+#     echo 'django:brand-new does not exists'
+#     exit 1
+# fi
 
 CID=$(docker run -d -e PROJECT_NAME=$PROJECT_NAME \
     --name postgres-$PROJECT_NAME \ 
