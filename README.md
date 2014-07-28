@@ -65,7 +65,7 @@ Configure postgres user:
 
 start postgresql and login by postgres user:
 
-    service postgresql start
+    service postgresql start && \
     sudo -i -u postgres
 
 now you have to execute:
@@ -80,7 +80,20 @@ enter password, prompt, then:
 
     \q
 
-and logout postgres, 
+and logout postgres:
+
+    exit
+
+stop container:
+
+    exit
+
+commit container:
+
+    sudo docker commit postgres-postgres postgres:postgres && \
+    sudo docker rm postgres-postgres
+
+Now you have image ready to use in create_project script!
 
 
 ## Django node
