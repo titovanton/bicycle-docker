@@ -17,9 +17,7 @@ fi
 #     exit 1
 # fi
 
-CID=$(docker run -d -e PROJECT_NAME=$PROJECT_NAME \
-    --name postgres-$PROJECT_NAME \ 
-    postgres:postgres /run.sh)
+CID=$(docker run -d -e PROJECT_NAME=$PROJECT_NAME --name postgres-$PROJECT_NAME postgres:postgres /run.sh)
 DB_PWD=$(cat /dev/urandom | tr -cd 'a-f0-9' | head -c 32)
 PG_HOST=$(docker inspect $CID | grep IPAddress | cut -d\" -f4)
 file=$(mktemp)
