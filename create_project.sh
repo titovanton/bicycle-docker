@@ -1,11 +1,9 @@
 #!/bin/bash
 
-if [[ $# < 1 ]]; then
-    echo 'PROJECT_NAME is missed'
-    exit 1
-else
-    PROJECT_NAME=$1
-fi
+while [[ ! $PROJECT_NAME ]]; do
+    read -p "Enter Ubuntu/Git user name please (required): " PROJECT_NAME
+    echo
+done
 # k=$(docker images postgres | grep postgres.*postgres || false)
 # if [[ ! $k ]]; then
 #     echo 'postgres:postgres image does not exists'
@@ -27,14 +25,11 @@ fi
 # rm $file
 
 # Django
-while [[ ! $USERNAME ]]; do
-    read -p "Enter Ubuntu/Git user name please (required): " USERNAME
-    echo
-done
 
 sudo docker run -ti \
-    --name django-adduser \
+    --name django-create \
     django:brand-new \
-    /create_user.sh $USERNAME && \
-sudo docker commit django-adduser django:$USERNAME && \
-sudo docker rm django-adduser
+    /create_project.sh $PROJECT_NAME $DB_PWD && \
+sudo docker commit django-$PROJECT_NAME django:$USERNAME && \
+sudo docker rm django-create
+

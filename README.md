@@ -1,12 +1,10 @@
 # bicycle-docker
 
-## Create project
-
-You have to specify <project_name> here:
+## Create a project
 
     file=$(mktemp) && \
     curl -s https://raw.githubusercontent.com/titovanton/bicycle-docker/master/create_project.sh > $file && \
-    sudo -E /bin/bash $file <project_name>  && \
+    sudo -E /bin/bash $file  && \
     rm $file
 
 ## Iptables
@@ -120,42 +118,6 @@ Create a brand new django-node image if you did not yet:
     sudo docker build -t \
         django:brand-new \
         https://raw.githubusercontent.com/titovanton/bicycle-docker/master/django-node/Dockerfile
-
-Create user and configure login:
-
-    sudo docker run -ti \
-        --name django-useradd \
-        django:brand-new \
-        /create_user.sh $USER $(cat /home/$USERNAME/.ssh/id_rsa.pub) && \
-    sudo docker commit django-useradd django:$USER && \
-    sudo docker rm django-useradd && \
-    sudo docker run -d \
-        --name django-ssh \
-        django:brand-new \
-        /bin/bash && \
-    IP=$(docker inspect django-ssh | grep IPAddress | cut -d\" -f4) && \
-    ssh $USER@$IP
-
-Now you have to create ssh key inside the container:
-
-    EMAIL=mail@$USER.com && \
-    
-    mkdir -p /home/$USER/.ssh && \
-    cd /home/$USER/.ssh && \
-    ssh-keygen -t rsa -C "$EMAIL" && \
-    eval `ssh-agent -s` && \
-    ssh-add /home/$USER/.ssh/id_rsa && \
-    exit
-
-Commit container:
-
-
-
-Create Django project, do not forget change `USERNAME` and `EMAIL` variables:
-
-    export USERNAME=$USER; \
-    export EMAIL=mail@$USER.com; \
-    curl -s https://raw.githubusercontent.com/titovanton/bicycle-docker/master/django-node/create_project.sh | /bin/bash
 
 ## ElasticSearch node
 
