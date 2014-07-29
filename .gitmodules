@@ -1,0 +1,3 @@
+[submodule "django-node/project_template"]
+	path = django-node/project_template
+	url = git@github.com:titovanton/django-project.git
