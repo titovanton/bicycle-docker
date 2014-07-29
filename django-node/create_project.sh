@@ -1,3 +1,5 @@
+#!/bin/bash
+
 if [[ $# < 2 ]]; then
     echo "Two parameters are required: PROJECT_NAME, DB_PWD"
     exit 1
