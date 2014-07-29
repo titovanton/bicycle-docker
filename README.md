@@ -126,7 +126,30 @@ Create user and configure login:
     sudo docker run -ti \
         --name django-useradd \
         django:brand-new \
-        /create_user.sh $USER $(cat /home/$USERNAME/.ssh/id_rsa.pub)
+        /create_user.sh $USER $(cat /home/$USERNAME/.ssh/id_rsa.pub) && \
+    sudo docker commit django-useradd django:$USER && \
+    sudo docker rm django-useradd && \
+    sudo docker run -d \
+        --name django-ssh \
+        django:brand-new \
+        /bin/bash && \
+    IP=$(docker inspect django-ssh | grep IPAddress | cut -d\" -f4) && \
+    ssh $USER@$IP
+
+Now you have to create ssh key inside the container:
+
+    EMAIL=mail@$USER.com && \
+    
+    mkdir -p /home/$USER/.ssh && \
+    cd /home/$USER/.ssh && \
+    ssh-keygen -t rsa -C "$EMAIL" && \
+    eval `ssh-agent -s` && \
+    ssh-add /home/$USER/.ssh/id_rsa && \
+    exit
+
+Commit container:
+
+
 
 Create Django project, do not forget change `USERNAME` and `EMAIL` variables:
 
@@ -152,7 +175,7 @@ Run daemon container:
 
 Prepare (set variables as you wish):
 
-    USERNAME=$USER && SHARE=/webapps; \
+    USERNAME=$USER && SHARE=/data && \
 
     sudo mkdir -p $SHARE && \
     sudo chown -R root:www-data $SHARE && \
@@ -174,19 +197,19 @@ Configure user:
     sudo docker commit samba-adduser samba:$USERNAME && \
     sudo docker rm samba-adduser
 
-Run daemon container (set IP as you wish):
+Run daemon container and mount a share to local file system:
 
-    # IP=$(ifconfig eth0 | grep 'inet addr' | cut -d: -f2 | awk '{print $1}'); \
+    USERNAME=$USER && \
 
     sudo docker run -d \
         --name samba \
+        -v /data:/data \
         -p 137:137/udp \
         -p 138:138/udp \
         -p 135:135/tcp \
         -p 139:139/tcp \
         -p 445:445/tcp \
-        samba:$USERNAME /usr/sbin/smbd --foreground --log-stdout
-
+        samba:$USERNAME /run.sh $USERNAME
 
 ## Automatically Start Containers
 
