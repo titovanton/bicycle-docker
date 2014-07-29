@@ -29,7 +29,7 @@ fi
 sudo docker run -ti \
     --name django-create \
     django:brand-new \
-    /create_project.sh $PROJECT_NAME $DB_PWD && \
-sudo docker commit django-$PROJECT_NAME django:$USERNAME && \
+    /create_project.sh $PROJECT_NAME $DB_PWD
+sudo docker commit django-$PROJECT_NAME django:$USERNAME
 sudo docker rm django-create
 
