@@ -1,6 +1,7 @@
 #!/bin/bash
 
-while [[ ! $PROJECT_NAME ]]; do
+PROJECT_NAME=''
+while [[ $PROJECT_NAME == '' ]]; do
     read -p "Enter Ubuntu/Git user name please (required): " PROJECT_NAME
     echo
 done
