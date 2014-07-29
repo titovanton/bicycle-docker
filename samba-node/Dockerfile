@@ -11,4 +11,10 @@ RUN chmod +x /create_user.sh
 
 VOLUME ["/data/"]
 
+EXPOSE 137/udp
+EXPOSE 138/udp
+EXPOSE 135/tcp
+EXPOSE 139/tcp
+EXPOSE 445/tcp
+
 CMD ["/usr/sbin/smbd", "--foreground", "--log-stdout"]

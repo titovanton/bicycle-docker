@@ -5,11 +5,6 @@ MAINTAINER Titov Anton <mail@titovanton.com>
 # ssh
 RUN apt-get -qqy install openssh-server
 RUN apt-get install -y openssh-server
-RUN mkdir /var/run/sshd
-RUN echo 'root:1' |chpasswd
-
-EXPOSE 22
-CMD    ["/usr/sbin/sshd", "-D"]
 
 # python
 RUN apt-get -qqy install build-essential
@@ -38,3 +33,5 @@ RUN pip -q install Django
 
 EXPOSE 22
 EXPOSE 8000
+
+CMD    ["/usr/sbin/sshd", "-D"]

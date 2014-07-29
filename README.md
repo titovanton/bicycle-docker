@@ -18,14 +18,22 @@ It is important to install iptables rules before installing docker, because of d
     sudo /bin/bash $file && \
     rm $file
 
-## Install Docker
+
+## Install Docker and prepare
 
 Ubuntu 14.04 LTS:
 
-    curl -s https://get.docker.io/ubuntu/ | sudo sh
-    sudo sh -c "echo 'DOCKER_OPTS=\"-r=false\"' > /etc/default/docker"
-    sudo apt-get upgrade -y
-    sudo apt-get install -y postgresql-client
+    EMAIL=mail@$USER.com && \
+
+    curl -s https://get.docker.io/ubuntu/ | sudo sh && \
+    sudo sh -c "echo 'DOCKER_OPTS=\"-r=false\"' > /etc/default/docker" && \
+    sudo apt-get upgrade -y && \
+    sudo apt-get install -y postgresql-client && \
+    mkdir -p /home/$USER/.ssh && \
+    cd /home/$USER/.ssh && \
+    ssh-keygen -t rsa -C "$EMAIL" && \
+    eval `ssh-agent -s` && \
+    ssh-add /home/$USER/.ssh/id_rsa
 
 ## Basic images:
 
@@ -112,6 +120,13 @@ Create a brand new django-node image if you did not yet:
     sudo docker build -t \
         django:brand-new \
         https://raw.githubusercontent.com/titovanton/bicycle-docker/master/django-node/Dockerfile
+
+Create user and configure login:
+
+    sudo docker run -ti \
+        --name django-useradd \
+        django:brand-new \
+        /create_user.sh $USER $(cat /home/$USERNAME/.ssh/id_rsa.pub)
 
 Create Django project, do not forget change `USERNAME` and `EMAIL` variables:
 
