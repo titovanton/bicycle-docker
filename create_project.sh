@@ -34,7 +34,7 @@ docker run -ti \
     django:brandnew \
     /create_project.sh $PROJECT_NAME $DB_PWD
 docker commit django_$PROJECT_NAME django:$PROJECT_NAME
-docker rm django-create
+docker rm django_create
 
 # run
 docker run -d \
