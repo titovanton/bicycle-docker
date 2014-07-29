@@ -2,6 +2,7 @@ FROM ubuntu:base
 
 MAINTAINER Titov Anton <mail@titovanton.com>
 
+
 RUN add-apt-repository -y ppa:nginx/stable
 RUN apt-get update
 RUN apt-get -qqy install nginx
