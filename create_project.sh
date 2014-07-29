@@ -9,14 +9,14 @@ if [[ ! $k ]]; then
     echo 'postgres:postgres image does not exists'
     exit 1
 fi
-k=$(docker images django | grep brand-new || false)
+k=$(docker images django | grep brandnew || false)
 if [[ ! $k ]]; then
-    echo 'django:brand-new does not exists'
+    echo 'django:brandnew does not exists'
     exit 1
 fi
 
 # DB
-CID=$(docker run -d -e PROJECT_NAME=$PROJECT_NAME --name postgres-$PROJECT_NAME postgres:postgres /run.sh)
+CID=$(docker run -d --name postgres_$PROJECT_NAME postgres:postgres /run.sh)
 DB_PWD=$(cat /dev/urandom | tr -cd 'a-f0-9' | head -c 32)
 PG_HOST=$(docker inspect $CID | grep IPAddress | cut -d\" -f4)
 file=$(mktemp)
@@ -26,22 +26,22 @@ rm $file
 
 # Django
 docker run -ti \
-    --name django-create \
+    --name django_create \
     --volumes-from nginx \
     --volumes-from samba \
-    --link postgres-$PROJECT_NAME \
+    --link postgres_$PROJECT_NAME \
     --link elasticsearch \
-    django:brand-new \
+    django:brandnew \
     /create_project.sh $PROJECT_NAME $DB_PWD
-docker commit django-$PROJECT_NAME django:$PROJECT_NAME
+docker commit django_$PROJECT_NAME django:$PROJECT_NAME
 docker rm django-create
 
 # run
 docker run -d \
-    --name django-$PROJECT_NAME \
+    --name django_$PROJECT_NAME \
     --volumes-from nginx \
     --volumes-from samba \
-    --link postgres-$PROJECT_NAME \
+    --link postgres_$PROJECT_NAME \
     --link elasticsearch \
     django:$PROJECT_NAME \
     /run.sh

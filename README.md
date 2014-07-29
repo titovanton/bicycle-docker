@@ -50,7 +50,7 @@ Ubuntu 14.04 LTS:
 Build image:
 
     sudo docker build --rm -t \
-        nginx:brand-new \
+        nginx:brandnew \
         https://raw.githubusercontent.com/titovanton/bicycle-docker/master/nginx-node/Dockerfile
 
 Run daemon container:
@@ -60,7 +60,7 @@ Run daemon container:
         -p 80:80 \
         -p 443:443 \
         -p 8000:8000 \
-        nginx:brand-new
+        nginx:brandnew
 
 ## PostgreSQL node
 
@@ -69,14 +69,14 @@ It also contains Redis, Memcached and /static/ + /media/ folders
 Build image:
 
     sudo docker build --rm -t \
-        postgres:brand-new \
+        postgres:brandnew \
         https://raw.githubusercontent.com/titovanton/bicycle-docker/master/postgresql-node/Dockerfile
 
 Configure postgres user:
 
     sudo docker run -i -t \
-        --name postgres-postgres \
-        postgres:brand-new /bin/bash
+        --name postgres_postgres \
+        postgres:brandnew /bin/bash
 
 start postgresql and login by postgres user:
 
@@ -105,8 +105,8 @@ stop container:
 
 commit container:
 
-    sudo docker commit postgres-postgres postgres:postgres && \
-    sudo docker rm postgres-postgres
+    sudo docker commit postgres_postgres postgres:postgres && \
+    sudo docker rm postgres_postgres
 
 Now you have image ready to use in create_project script!
 
@@ -116,7 +116,7 @@ Now you have image ready to use in create_project script!
 Create a brand new django-node image if you did not yet:
 
     sudo docker build --rm -t \
-        django:brand-new \
+        django:brandnew \
         https://raw.githubusercontent.com/titovanton/bicycle-docker/master/django-node/Dockerfile
 
 ## ElasticSearch node
@@ -124,14 +124,14 @@ Create a brand new django-node image if you did not yet:
 Build image:
 
     sudo docker build --rm -t \
-        elasticsearch:brand-new \
+        elasticsearch:brandnew \
         https://raw.githubusercontent.com/titovanton/bicycle-docker/master/elasticsearch-node/Dockerfile
 
 Run daemon container:
 
     sudo docker run -d \
         --name elasticsearch \
-        elasticsearch:brand-new
+        elasticsearch:brandnew
 
 ## Samba node
 
@@ -147,17 +147,17 @@ Prepare (set variables as you wish):
 Build image:
 
     sudo docker build --rm -t \
-        samba:brand-new \
+        samba:brandnew \
         https://raw.githubusercontent.com/titovanton/bicycle-docker/master/samba-node/Dockerfile
 
 Configure user:
 
     sudo docker run -ti \
-        --name samba-adduser \
-        samba:brand-new \
+        --name samba_adduser \
+        samba:brandnew \
         /create_user.sh $USERNAME && \
-    sudo docker commit samba-adduser samba:$USERNAME && \
-    sudo docker rm samba-adduser
+    sudo docker commit samba_adduser samba:$USERNAME && \
+    sudo docker rm samba_adduser
 
 Run daemon container and mount a share to local file system:
 
