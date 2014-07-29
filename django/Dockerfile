@@ -38,5 +38,3 @@ RUN pip -q install Django
 
 EXPOSE 22
 EXPOSE 8000
-
-CMD    ["/usr/sbin/sshd", "-D"]
