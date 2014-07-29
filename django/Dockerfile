@@ -2,9 +2,14 @@ FROM ubuntu:base
 
 MAINTAINER Titov Anton <mail@titovanton.com>
 
+
+# git
+RUN apt-get -qqy install git
+
 # ssh
 RUN apt-get -qqy install openssh-server
-RUN apt-get install -y openssh-server
+RUN mkdir -p /var/run/sshd
+RUN echo 'root:1' |chpasswd
 
 # python
 RUN apt-get -qqy install build-essential

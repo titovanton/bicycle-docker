@@ -3,9 +3,6 @@ FROM django:base
 MAINTAINER Titov Anton <mail@titovanton.com>
 
 
-
-
-
 # RUN pip -q install python-memcached
 # RUN pip -q install django-extensions
 # RUN pip -q install django-debug-toolbar
