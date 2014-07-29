@@ -24,7 +24,7 @@ curl https://raw.githubusercontent.com/titovanton/bicycle-docker/master/postgres
 psql -h $PG_HOST -U postgres -f $file -v passwd=\'$DB_PWD\' -v user=$PROJECT_NAME
 rm $file
 
-echo $PG_HOST
+echo $DB_PWD
 # # Django
 # docker run -ti \
 #     --name django_create \
