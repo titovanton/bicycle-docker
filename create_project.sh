@@ -24,24 +24,25 @@ curl https://raw.githubusercontent.com/titovanton/bicycle-docker/master/postgres
 psql -h $PG_HOST -U postgres -f $file -v passwd=\'$DB_PWD\' -v user=$PROJECT_NAME
 rm $file
 
-# Django
-docker run -ti \
-    --name django_create \
-    --volumes-from nginx \
-    --volumes-from samba \
-    --link postgres_$PROJECT_NAME:DB \
-    --link elasticsearch:ES \
-    django:brandnew \
-    /create_project.sh $PROJECT_NAME $DB_PWD
-docker commit django_$PROJECT_NAME django:$PROJECT_NAME
-docker rm django_create
+echo $PG_HOST
+# # Django
+# docker run -ti \
+#     --name django_create \
+#     --volumes-from nginx \
+#     --volumes-from samba \
+#     --link postgres_$PROJECT_NAME:DB \
+#     --link elasticsearch:ES \
+#     django:brandnew \
+#     /create_project.sh $PROJECT_NAME $DB_PWD
+# docker commit django_$PROJECT_NAME django:$PROJECT_NAME
+# docker rm django_create
 
-# run
-docker run -d \
-    --name django_$PROJECT_NAME \
-    --volumes-from nginx \
-    --volumes-from samba \
-    --link postgres_$PROJECT_NAME:DB \
-    --link elasticsearch:ES \
-    django:$PROJECT_NAME \
-    /run.sh
+# # run
+# docker run -d \
+#     --name django_$PROJECT_NAME \
+#     --volumes-from nginx \
+#     --volumes-from samba \
+#     --link postgres_$PROJECT_NAME:DB \
+#     --link elasticsearch:ES \
+#     django:$PROJECT_NAME \
+#     /run.sh
