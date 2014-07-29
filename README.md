@@ -113,14 +113,10 @@ Create a brand new django-node image if you did not yet:
         django:brand-new \
         https://raw.githubusercontent.com/titovanton/bicycle-docker/master/django-node/Dockerfile
 
-Launch container:
+Create Django project, do not forget change `USERNAME` and `EMAIL` variables:
 
-    sudo docker run -i -t --name django-myproject $USER/django-node:brand-new /bin/bash
-
-Create Django project, do not forget change `PROJECT_NAME` and `EMAIL` variables:
-
-    export PROJECT_NAME=myproject; \
-    export EMAIL=mail@titovanton.com; \
+    export USERNAME=$USER; \
+    export EMAIL=mail@$USER.com; \
     curl -s https://raw.githubusercontent.com/titovanton/bicycle-docker/master/django-node/create_project.sh | /bin/bash
 
 ## ElasticSearch node

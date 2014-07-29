@@ -2,9 +2,16 @@ FROM ubuntu:base
 
 MAINTAINER Titov Anton <mail@titovanton.com>
 
+# ssh
+RUN apt-get -qqy install openssh-server
+RUN apt-get install -y openssh-server
+RUN mkdir /var/run/sshd
+RUN echo 'root:1' |chpasswd
+
+EXPOSE 22
+CMD    ["/usr/sbin/sshd", "-D"]
 
 # python
-RUN apt-get -qqy install openssh-server
 RUN apt-get -qqy install build-essential
 RUN apt-get -qqy install python2.7-dev
 RUN apt-get -qqy install python-psycopg2
