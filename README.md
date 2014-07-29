@@ -115,7 +115,7 @@ Now you have image ready to use in create_project script!
 
 Create a brand new django-node image if you did not yet:
 
-    sudo docker build -t \
+    sudo docker build --rm -t \
         django:brand-new \
         https://raw.githubusercontent.com/titovanton/bicycle-docker/master/django-node/Dockerfile
 
