@@ -171,7 +171,7 @@ Run daemon container and mount a share to local file system:
         -p 135:135/tcp \
         -p 139:139/tcp \
         -p 445:445/tcp \
-        samba:$USERNAME /run.sh $USERNAME
+        samba:$USERNAME /run.sh
 
 ## Automatically Start Containers
 
